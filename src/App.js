@@ -1,26 +1,66 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Chatkit from '@pusher/chatkit-client';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import MessageList from './components/MessageList';
+import SendMessageForm from './components/SendMessageForm';
+import RoomList from './components/RoomList';
+import NewRoomForm from './components/NewRoomForm.js';
+import { tokenUrl, instanceLocator } from './config.js';
+
+class App extends React.Component {
+
+  constructor(){
+    super()
+    this.state = {
+      messages: []
+    }
+  }
+
+  componentDidMount()
+  {
+    const tokenProvider = new Chatkit.TokenProvider({
+      url: tokenUrl
+  });
+
+    const chatManager = new Chatkit.ChatManager({
+      instanceLocator,
+      userId: 'Rudniev',
+      tokenProvider: tokenProvider
+  });
+
+    chatManager.connect()
+    .then(currentUser => {
+        currentUser.subscribeToRoomMultipart({
+          roomId: '31264859',
+          hooks:
+            {
+              onMessage: message => {
+                this.setState({
+                  messages: [...this.state.messages,message]
+                })
+              } 
+            }
+        })
+        .catch(error => {
+          console.log("error: ", error);
+        })
+    })
+  }
+
+
+  render()
+  {
+    return (
+    <div className="app">
+        <RoomList />
+        <MessageList messages={this.state.messages}/>
+        <SendMessageForm />
+        <NewRoomForm />
     </div>
-  );
+    );
+  }
+
 }
 
 export default App;
