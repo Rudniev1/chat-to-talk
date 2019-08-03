@@ -47,6 +47,7 @@ html, body {
 
 .send-message-form {
   grid-area: f;
+  color: darkcyan
 }
 
 /* REST OF CSS */
