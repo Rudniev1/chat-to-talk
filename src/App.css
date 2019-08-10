@@ -1,9 +1,10 @@
 :root {
-  --main-color: #5ea3d0;
-  --secondary-color: white;
-  --main-text-color: #3e5869;
-  --secondary-text-color: #b0c7d6;
-  --send-message-form: #F5F5F5;
+  --main-color: #252a5e;
+  --secondary-color: rgb(37, 37, 36);
+  --main-text-color: #16e427;
+  --secondary-text-color: #36e06f;
+  --send-message-form: rgb(46, 48, 41);
+  --selected-room-color: rgb(217, 228, 74);
 }
 
 html, body {
@@ -12,7 +13,7 @@ html, body {
   padding: 0;
   font-family: system-ui;
   font-weight: 200;
-  color: 	#3e5869; 
+  color: 	#e5edf3; 
 }
 
 #root {
@@ -47,7 +48,7 @@ html, body {
 
 .send-message-form {
   grid-area: f;
-  color: darkcyan
+  color: rgb(10, 231, 84)
 }
 
 /* REST OF CSS */
@@ -71,7 +72,7 @@ html, body {
 
 .rooms-list > h3 {
   margin: 5px 0;
-  color: var(--secondary-color);
+  color: var(--secondary-text-color);
 }
 
 .rooms-list .room a {
@@ -82,7 +83,7 @@ html, body {
 }
 
 .rooms-list .room.active a {
-  color: var(--secondary-color);
+  color: var(--selected-room-color);
 }
 
 .new-room-form {
@@ -138,7 +139,7 @@ html, body {
 }
 .message .message-text {
   background: var(--main-color);
-  color: var(--secondary-color);
+  color: var(--secondary-text-color);
   display: inline;
   padding: 4px 8px;
   border-radius: 8px;
